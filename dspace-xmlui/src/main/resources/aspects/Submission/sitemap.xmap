@@ -234,7 +234,6 @@
           <!-- javascript libraries and utils for choice/authority-control -->
           <map:match type="regexp" pattern="(^submit)|(^handle/.*/submit)|(^handle/.*/workflow)">
             <map:transform type="IncludePageMeta">
-              <map:parameter name="javascript.static#1" value="loadJQuery.js"/>
               <map:parameter name="javascript.static#2" value="static/js/vocabulary-support.js"/>
               <map:parameter name="javascript.static#3" value="static/js/scriptaculous/prototype.js"/>
               <map:parameter name="javascript.static#4" value="static/js/scriptaculous/effects.js"/>

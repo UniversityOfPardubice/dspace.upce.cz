@@ -525,7 +525,6 @@ to administer DSpace.
 		        		<map:match pattern="admin/item/bitstreams">
                             <!--Add the javascript-->
                             <map:transform type="IncludePageMeta">
-                                <map:parameter name="javascript.static#1" value="loadJQuery.js"/>
                                 <map:parameter name="javascript.static#2" value="static/js/bitstream-ordering.js"/>
                             </map:transform>
 

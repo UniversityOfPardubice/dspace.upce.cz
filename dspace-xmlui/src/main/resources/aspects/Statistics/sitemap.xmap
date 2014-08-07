@@ -60,7 +60,6 @@
                     <map:parameter name="type" value="search"/>
 
                     <map:transform type="IncludePageMeta">
-                        <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                         <map:parameter name="javascript.static.statistics#2" value="static/js/usage-statistics.js"/>
                     </map:transform>
                     <map:transform type="StatisticsSearchTransformer"/>
@@ -74,7 +73,6 @@
                     <map:parameter name="type" value="workflow"/>
 
                     <map:transform type="IncludePageMeta">
-                        <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                         <map:parameter name="javascript.static.statistics#2" value="static/js/usage-statistics.js"/>
                     </map:transform>
                     <map:transform type="StatisticsWorkflowTransformer"/>
@@ -125,7 +123,6 @@
                     <map:parameter name="type" value="search"/>
 
                     <map:transform type="IncludePageMeta">
-                        <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                         <map:parameter name="javascript.static.statistics#2" value="static/js/usage-statistics.js"/>
                     </map:transform>
                     <map:transform type="StatisticsSearchTransformer"/>
@@ -157,7 +154,6 @@
                     <map:parameter name="type" value="workflow"/>
 
                     <map:transform type="IncludePageMeta">
-                        <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                         <map:parameter name="javascript.static.statistics#2" value="static/js/usage-statistics.js"/>
                     </map:transform>
                     <map:transform type="StatisticsWorkflowTransformer"/>
@@ -185,7 +181,6 @@
 
             <map:match pattern="search">
                 <map:transform type="IncludePageMeta">
-                    <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                     <map:parameter name="javascript.static.statistics#2" value="static/js/search-results.js"/>
                 </map:transform>
                 <map:transform type="StatisticsSearchResultTransformer">
@@ -195,7 +190,6 @@
 
             <map:match pattern="simple-search">
                 <map:transform type="IncludePageMeta">
-                    <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                     <map:parameter name="javascript.static.statistics#2" value="static/js/search-results.js"/>
                 </map:transform>
                 <map:transform type="StatisticsSearchResultTransformer">
@@ -205,7 +199,6 @@
 
             <map:match pattern="advanced-search">
                 <map:transform type="IncludePageMeta">
-                    <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                     <map:parameter name="javascript.static.statistics#2" value="static/js/search-results.js"/>
                 </map:transform>
                 <map:transform type="StatisticsSearchResultTransformer">
@@ -245,7 +238,6 @@
                         <!-- Simple search -->
                         <map:match pattern="handle/*/*/search">
                             <map:transform type="IncludePageMeta">
-                                <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                                 <map:parameter name="javascript.static.statistics#2" value="static/js/search-results.js"/>
                             </map:transform>
                             <map:transform type="StatisticsSearchResultTransformer">
@@ -256,7 +248,6 @@
                         <!-- Simple search again, but this time they said it -->
                         <map:match pattern="handle/*/*/simple-search">
                             <map:transform type="IncludePageMeta">
-                                <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                                 <map:parameter name="javascript.static.statistics#2" value="static/js/search-results.js"/>
                             </map:transform>
                             <map:transform type="StatisticsSearchResultTransformer">
@@ -267,7 +258,6 @@
                         <!-- Advanced search -->
                         <map:match pattern="handle/*/*/advanced-search">
                             <map:transform type="IncludePageMeta">
-                                <map:parameter name="javascript.static.statistics#1" value="loadJQuery.js"/>
                                 <map:parameter name="javascript.static.statistics#2" value="static/js/search-results.js"/>
                             </map:transform>
                             <map:transform type="StatisticsSearchResultTransformer">

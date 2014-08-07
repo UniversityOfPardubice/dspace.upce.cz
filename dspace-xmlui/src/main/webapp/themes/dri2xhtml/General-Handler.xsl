@@ -227,7 +227,7 @@
         <xsl:choose>
             <xsl:when test="not ($rights_context/@CONTEXTCLASS = 'GENERAL PUBLIC') and ($rights_context/rights:Permissions/@DISPLAY = 'true')">
                 <a href="{mets:FLocat[@LOCTYPE='URL']/@xlink:href}">
-                    <img width="64" height="64" src="{concat($theme-path,'/images/Crystal_Clear_action_lock3_64px.png')}">
+                    <img src="{concat($theme-path,'/images/locked.png')}">
                         <xsl:attribute name="title"><xsl:value-of select="$alt-text"/></xsl:attribute>
                         <xsl:attribute name="alt"><xsl:value-of select="$alt-text"/></xsl:attribute>
                     </img>

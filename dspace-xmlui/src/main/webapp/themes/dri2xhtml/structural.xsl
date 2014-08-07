@@ -168,10 +168,6 @@
                         <xsl:value-of select="@qualifier"/>
                     </xsl:attribute>
                     <xsl:attribute name="href">
-                        <xsl:value-of select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='contextPath'][not(@qualifier)]"/>
-                        <xsl:text>/themes/</xsl:text>
-                        <xsl:value-of select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='theme'][@qualifier='path']"/>
-                        <xsl:text>/</xsl:text>
                         <xsl:value-of select="."/>
                     </xsl:attribute>
                 </link>
@@ -242,6 +238,14 @@
                                 }
             </script>
 
+            <!-- Add theme javascipt  -->
+            <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='javascript'][not(@qualifier)]">
+                <script type="text/javascript">
+                    <xsl:attribute name="src">
+                        <xsl:value-of select="."/>
+                    </xsl:attribute>&#160;</script>
+            </xsl:for-each>
+
             <!-- add "shared" javascript from static, path is relative to webapp root -->
             <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='javascript'][@qualifier='url']">
                 <script type="text/javascript">
@@ -259,34 +263,13 @@
                         <xsl:value-of select="."/>
                     </xsl:attribute>&#160;</script>
             </xsl:for-each>
-
-            <!-- Add theme javascipt  -->
-            <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='javascript'][not(@qualifier)]">
-                <script type="text/javascript">
-                    <xsl:attribute name="src">
-                        <xsl:value-of select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='contextPath'][not(@qualifier)]"/>
-                        <xsl:text>/themes/</xsl:text>
-                        <xsl:value-of select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='theme'][@qualifier='path']"/>
-                        <xsl:text>/</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:attribute>&#160;</script>
-            </xsl:for-each>
             
             
-            <!-- Add a google analytics script if the key is present -->
-            <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='google'][@qualifier='analytics']">
                 <script type="text/javascript"><xsl:text>
-                       var _gaq = _gaq || [];
-                       _gaq.push(['_setAccount', '</xsl:text><xsl:value-of select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='google'][@qualifier='analytics']"/><xsl:text>']);
-                       _gaq.push(['_trackPageview']);
-
-                       (function() {
-                           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                       })();
+		    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		    ga('create', 'UA-1621542-21', 'upce.cz');
+		    ga('send', 'pageview');
                </xsl:text></script>
-            </xsl:if>
             
             
             <!-- Add the title in -->
@@ -346,25 +329,10 @@
             <h2 class="static-pagetitle"><i18n:text>xmlui.dri2xhtml.structural.head-subtitle</i18n:text></h2>
             
             
-            <ul id="ds-trail">
-                <xsl:choose>
-                        <xsl:when test="starts-with($request-uri, 'page/about')">
-                            <xsl:text>About This Repository</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="count(/dri:document/dri:meta/dri:pageMeta/dri:trail) = 0">
-                                <li class="ds-trail-link first-link"> - </li>
-                        </xsl:when>
-                        <xsl:otherwise>
-                                <xsl:apply-templates select="/dri:document/dri:meta/dri:pageMeta/dri:trail"/>
-                        </xsl:otherwise>
-                </xsl:choose>
-            </ul>
-           
-            
             <xsl:choose>
                 <xsl:when test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
                     <div id="ds-user-box">
-                        <p>
+                        <div id="ds-user-box-profile">
                             <a>
                                 <xsl:attribute name="href">
                                     <xsl:value-of select="/dri:document/dri:meta/dri:userMeta/
@@ -385,15 +353,13 @@
                                 </xsl:attribute>
                                 <i18n:text>xmlui.dri2xhtml.structural.logout</i18n:text>
                             </a>
-                        </p>
-                        <p>
-                            <xsl:call-template name="languageSelection" />
-                        </p>
+                        </div>
+                        <xsl:call-template name="languageSelection" />
                     </div>
                 </xsl:when>
                 <xsl:otherwise>
                     <div id="ds-user-box">
-                        <p>
+                        <div id="ds-user-box-profile">
                             <a>
                                 <xsl:attribute name="href">
                                     <xsl:value-of select="/dri:document/dri:meta/dri:userMeta/
@@ -401,10 +367,8 @@
                                 </xsl:attribute>
                                 <i18n:text>xmlui.dri2xhtml.structural.login</i18n:text>
                             </a>
-                        </p>
-                        <p>
-                            <xsl:call-template name="languageSelection" />
-                        </p>
+                        </div>
+                        <xsl:call-template name="languageSelection" />
                     </div>
                 </xsl:otherwise>
             </xsl:choose>
@@ -567,6 +531,21 @@
     -->
     <xsl:template match="dri:body">
         <div id="ds-body">
+            <ul id="ds-trail">
+                <xsl:choose>
+                        <xsl:when test="starts-with($request-uri, 'page/about')">
+                            <xsl:text>About This Repository</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="count(/dri:document/dri:meta/dri:pageMeta/dri:trail) = 0">
+                                <li class="ds-trail-link first-link"> - </li>
+                        </xsl:when>
+                        <xsl:otherwise>
+                                <xsl:apply-templates select="/dri:document/dri:meta/dri:pageMeta/dri:trail"/>
+                        </xsl:otherwise>
+                </xsl:choose>
+            </ul>
+           
+            
             <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='alert'][@qualifier='message']">
                 <div id="ds-system-wide-alert">
                     <p>
@@ -3830,6 +3809,10 @@
                             <xsl:text>?locale-attribute=</xsl:text>
                             <xsl:value-of select="$locale"/>
                         </xsl:attribute>
+			<xsl:attribute name="class">
+			    <xsl:text>lang-</xsl:text>
+			    <xsl:value-of select="$locale"/>
+			</xsl:attribute>
                         <xsl:value-of select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='supportedLocale'][@qualifier=$locale]"/>
                     </a>
                 </xsl:for-each>
