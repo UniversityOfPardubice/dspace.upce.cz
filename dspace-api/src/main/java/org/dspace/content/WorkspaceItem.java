@@ -31,7 +31,7 @@ import org.dspace.storage.rdbms.TableRowIterator;
  * @author Robert Tansley
  * @version $Revision$
  */
-public class WorkspaceItem implements InProgressSubmission
+public class WorkspaceItem extends DSpaceObject implements InProgressSubmission
 {
     /** log4j logger */
     private static Logger log = Logger.getLogger(WorkspaceItem.class);
@@ -654,4 +654,19 @@ public class WorkspaceItem implements InProgressSubmission
     {
         wiRow.setColumn("published_before", b);
     }
+
+	@Override
+	public String getHandle() {
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		return Constants.WORKSPACE;
+	}
 }

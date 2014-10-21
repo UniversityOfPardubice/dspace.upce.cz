@@ -204,7 +204,9 @@ public abstract class AbstractSearch extends AbstractFiltersTransformer {
             queryResults = null;
         }
 
-        if (queryResults != null) {
+//TODO jirka zmena 20.0.2012, nebude se vypisovat pocet vysledku kdyz je query prazdne
+        if (queryResults != null && getQuery() != null && !getQuery().isEmpty()) {
+//        if (queryResults != null) {
             search.addPara("result-query", "result-query")
                     .addContent(T_result_query.parameterize(getQuery(), queryResults.getResults().getNumFound()));
         }

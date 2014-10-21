@@ -25,6 +25,8 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.Context;
 import org.dspace.core.I18nUtil;
 import org.dspace.core.LogManager;
+import org.dspace.usage.UsageEvent;
+import org.dspace.utils.DSpace;
 
 /**
  * Simple username and password authentication servlet. Displays the login form
@@ -76,6 +78,13 @@ public class PasswordServlet extends DSpaceServlet
 
             log.info(LogManager.getHeader(context, "login", "type=explicit"));
 
+            new DSpace().getEventService().fireEvent(
+            		new UsageEvent(
+            				UsageEvent.Action.LOGIN,
+            				request, 
+            				context, 
+            				context.getCurrentUser()));
+            
                 // resume previous request
                 Authenticate.resumeInterruptedRequest(request, response);
 

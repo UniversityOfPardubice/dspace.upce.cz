@@ -931,13 +931,18 @@ Common usage:
         <get src="http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz" dest="${dspace.dir}/config/GeoLiteCity.dat.gz" verbose="true" />
         <gunzip src="${dspace.dir}/config/GeoLiteCity.dat.gz" dest="${dspace.dir}/config/GeoLiteCity.dat" />
         <delete file="${dspace.dir}/config/GeoLiteCity.dat.gz" />
+        <echo>Downloading: http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz</echo>
+        <get src="http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" dest="${dspace.dir}/config/GeoIP.dat.gz" verbose="true" />
+        <gunzip src="${dspace.dir}/config/GeoIP.dat.gz" dest="${dspace.dir}/config/GeoIP.dat" />
+        <delete file="${dspace.dir}/config/GeoIP.dat.gz" />
     </target>
 
     <target name="check_geolite">
         <condition property="need.geolite">
-            <not>
-                <available file="${dspace.dir}/config/GeoLiteCity.dat" />
-            </not>
+        	<and>
+            	<not><available file="${dspace.dir}/config/GeoLiteCity.dat" /></not>
+            	<not><available file="${dspace.dir}/config/GeoIP.dat" /></not>
+        	</and>
         </condition>
     </target>
 

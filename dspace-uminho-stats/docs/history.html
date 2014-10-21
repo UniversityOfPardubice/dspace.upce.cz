@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+  <title>Statistics System Documentation: Version History</title>
+  <link rel="StyleSheet" href="style.css" type="text/css">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=UTF-8">
+</head>
+<body>
+<h1>Statistics System Documentation: Version History</h1>
+<p><a href="index.html">Back to contents</a></p>
+
+<h2><a name="version3_1" id="version3_0">Changes in Stats 3.1</a></h3>
+<ul>
+<li>Code addapted to the DSpace 1.7.2 structure</li>
+</ul>
+
+<h2><a name="version3_0" id="version3_0">Changes in Stats 3.0</a></h3>
+<ul>
+<li>Code addapted to the DSpace 1.6.2 structure</li>
+</ul>
+
+
+<h2><a name="version2_1_1" id="version2_1_1">Changes in Stats 2.1.1</a></h3>
+<h3>Bug fixes</h3>
+<ul>
+<li>Corrected the class invoked in the script stats-aggregate</li>
+<li>Added the dependency dspace-stats-api in modules/xmlui/pom.xml</li>
+</ul>
+
+<h2><a name="version2_1" id="version2_1">Changes in Stats 2.1</a></h3>
+<ul>
+  <li>Adapted to DSpace 1.5.1 build and deploy architecture</li>
+  <li>Installation process based on SVN Patch mechanism</li>
+  <li>Improvement to the gathering mechanism of DSpace events
+    <ul>
+      <li>The add-on no longer depends on DSpace logging system</li>
+      <li>Eliminated the log4j JDBC appender mechanism</li>
+      <li>The events are processed and stored using a event firing mechanism on the user interface <br>
+      (based on Mark Wood UsageEvent plug-in)</li>
+    </ul>
+  </li>
+  <li>Improvement to the events aggregation mechanism
+    <ul>
+      <li>Passed from PostgreSQL environment (pg/plsql) to Java.</li>
+      <li>There is no need to install pl/java anymore.</li>
+      <li>All the additional pl/pgsql functions were ported to Java</li>
+       <li>There is no need to install pl/java anymore.</li>       
+    </ul>
+  </li>
+  <li>Improvement to the spider detection mechanism
+    <ul>
+      <li>Performance improvements of the procedure.</li>
+      <li>Weblog analysis improvment.</li>
+      <li>Sessions analysis.</li>
+      <li>Flagging of IPs to watch in the future</li>
+      <li>User interface to this information (integrated on statistics user interface)</li>        
+    </ul>
+  </li>
+  <li>New administrator commands (Java API)</li> 
+</ul>
+
+
+<h2><a name="version2_0" id="version2_0">Changes in Stats 2.0</a></h3>
+<ul>
+  <li>Improvement of the performance and response time
+      <UL>
+        <LI>Temporal data aggregations</LI>
+        <LI>Dimensional aggregations (e.g. Country, Document type, etc.)</LI>
+      </UL>
+  </li>
+  <li>Improvement of the presentation and navigation
+      <UL>
+        <LI>Customizable menu navigation Structure (100% XML)</LI>
+        <LI>Customizable statistics layout (100% XSL stylesheets)</LI>
+        <LI>Charts</LI>
+      </UL>
+  </li>
+  <li>New statistics</li>
+  <li> Multilanguage support</li>
+  <li>Better system documentation
+      <UL>
+        <LI>Renewed Installation Guide</LI>
+        <LI>New <a href="user_guide.html">User Guide</a></LI>
+      </UL>
+  </li>
+</ul>
+<h2><a name="version1_1">Changes in Stats 1.1</a></h3>
+
+<ul>
+   <li>Detection, processing and distinction of own institution access</li>
+   <li>New 3:4 country flags</li>
+   <li>Dspace 1.4 compatibility</li>
+</ul>
+
+
+<p><a href="index.html">Back to contents</a></p>
+
+ <hr>
+    <p>
+    This add-on was developed by <a href="http://www.keep.pt">KEEP SOLUTIONS<a>, a spin-off company of the
+University of Minho, specialized in digital preservation and advanced
+solutions for digital archives and libraries, in partnership with the
+Documentation Services of the University of Minho. The add-on was developed
+in the context of the <a href="http://projecto.rcaap.pt/">RCAAP</a> and <a href="http://www.driver-repository.eu/">DRIVER</a> projects.
+
+Any questions or comments regarding this add-on may be sent to any of the
+following contacts:
+    </p>
+
+
+    
+    <table width="96%" border="0">
+      <tr>
+        <td width="531" valign="center"><p><a href="http://www.keep.pt"><img src="image/logo.jpg" alt="Logo" border="0"></a><br>
+              <a href="http://www.keep.pt">http://www.keep.pt</a></p>
+            <p><strong>Contacts:</strong> </p>
+          <ul>
+              <li>João Melo &lt;<a href="mailto:jmelo@keep.pt">jmelo@keep.pt</a>&gt;</li>
+            <li>Miguel Ferreira &lt;<a href="mailto:mferreira@keep.pt">mferreira@keep.pt</a>&gt; <br>
+              </li>
+          </ul></td>
+        <td width="18"></td>
+        <td width="500" valign="top"><p><a href="http://www.sdum.uminho.pt"><img src="image/uminho_logo.jpeg" alt="Uminho logo" width="125" height="62" border="0"></a><br/>
+              <a href="http://www.sdum.uminho.pt">http://www.sdum.uminho.pt</a></p>
+            <p><strong>Contacts:</strong> </p>
+          <ul>
+              <li>José Carvalho &lt;<a href="mailto:jcarvalho@sdum.uminho.pt">jcarvalho@sdum.uminho.pt</a>&gt; </li>
+            <li>Eloy Rodrigues &lt;<a href="mailto:eloy@sdum.uminho.pt">eloy@sdum.uminho.pt</a>&gt;</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td valign="center">&nbsp;</td>
+        <td></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="center">João Melo</td>
+        <td></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="center">&nbsp;</td>
+        <td></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="center">&nbsp;</td>
+        <td></td>
+        <td align="right"><span style="color:#999999; vertical-align:middle">Financed by: &nbsp;&nbsp;</span> <img src="image/pos_conhecimento.gif" alt="POSC_C"><img src="image/ue.gif" alt="UE"></td>
+      </tr>
+    </table>
+</body>
+</html>

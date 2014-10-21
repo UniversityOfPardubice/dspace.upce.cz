@@ -25,6 +25,9 @@ import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
 import org.dspace.core.I18nUtil;
+import org.dspace.usage.UsageEvent;
+import org.dspace.utils.DSpace;
+
 import java.util.Locale;
 
 /**
@@ -85,6 +88,13 @@ public class LDAPServlet extends DSpaceServlet
 
             log.info(LogManager.getHeader(context, "login", "type=explicit"));
 
+            new DSpace().getEventService().fireEvent(
+            		new UsageEvent(
+            				UsageEvent.Action.LOGIN,
+            				request, 
+            				context, 
+            				context.getCurrentUser()));
+            
             // resume previous request
             Authenticate.resumeInterruptedRequest(request, response);
 

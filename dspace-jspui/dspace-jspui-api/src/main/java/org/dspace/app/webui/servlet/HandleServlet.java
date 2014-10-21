@@ -395,9 +395,14 @@ public class HandleServlet extends DSpaceServlet
                 suggestEnable = (context.getCurrentUser() == null ? false : true);
             }
         }
-        
+        // Enable statistics link or not
+        boolean statsEnable = false;
+        if (ConfigurationManager.getBooleanProperty("stats.enable"))
+        	statsEnable= true;
+
         // Set attributes and display
         request.setAttribute("suggest.enable", Boolean.valueOf(suggestEnable));
+	request.setAttribute("stats.enable", new Boolean(statsEnable));
         request.setAttribute("display.all", Boolean.valueOf(displayAll));
         request.setAttribute("item", item);
         request.setAttribute("collections", collections);

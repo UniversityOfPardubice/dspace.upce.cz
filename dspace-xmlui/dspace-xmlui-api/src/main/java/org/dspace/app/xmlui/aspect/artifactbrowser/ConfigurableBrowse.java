@@ -443,13 +443,57 @@ public class ConfigurableBrowse extends AbstractDSpaceTransformer implements
             }
             letterQuery.put(BrowseParams.STARTS_WITH, "0");
             jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "0-9");
-            
+
+
+
+            // VLOZI DO SEZNAMU ABECEDY VSECHNA PISMENA OD A DO Z
+
+            for (char c = 'A'; c <= 'C'; c++)
+            {
+                letterQuery.put(BrowseParams.STARTS_WITH, Character.toString(c));
+                jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), Character
+                        .toString(c));
+            }
+            letterQuery.put(BrowseParams.STARTS_WITH, "Č");
+            jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "Č");
+            for (char c = 'D'; c <= 'H'; c++)
+            {
+                letterQuery.put(BrowseParams.STARTS_WITH, Character.toString(c));
+                jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), Character
+                        .toString(c));
+            }
+            letterQuery.put(BrowseParams.STARTS_WITH, "Ch");
+            jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "Ch");
+            for (char c = 'I'; c <= 'R'; c++)
+            {
+                letterQuery.put(BrowseParams.STARTS_WITH, Character.toString(c));
+                jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), Character
+                        .toString(c));
+            }
+            letterQuery.put(BrowseParams.STARTS_WITH, "Ř");
+            jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "Ř");
+            letterQuery.put(BrowseParams.STARTS_WITH, "S");
+            jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "S");
+            letterQuery.put(BrowseParams.STARTS_WITH, "Š");
+            jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "Š");
+            for (char c = 'T'; c <= 'Z'; c++)
+            {
+                letterQuery.put(BrowseParams.STARTS_WITH, Character.toString(c));
+                jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), Character
+                        .toString(c));
+            }
+            letterQuery.put(BrowseParams.STARTS_WITH, "Ž");
+            jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), "Ž");
+
+
+/*
             for (char c = 'A'; c <= 'Z'; c++)
             {
                 letterQuery.put(BrowseParams.STARTS_WITH, Character.toString(c));
                 jumpList.addItemXref(super.generateURL(BROWSE_URL_BASE, letterQuery), Character
                         .toString(c));
             }
+*/
 
             // Create a free text field for the initial characters
             Para jumpForm = jump.addPara();

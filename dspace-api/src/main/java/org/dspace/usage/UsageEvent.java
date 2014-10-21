@@ -26,6 +26,7 @@ public class UsageEvent extends Event {
 		CREATE ("create"),
 		UPDATE ("update"),
 		DELETE ("delete"),
+		ADVANCED_WORKFLOW ("advanced_workflow"),
 		ADD ("add"),
 		REMOVE ("remove"),
 		BROWSE ("browse"),
@@ -56,6 +57,8 @@ public class UsageEvent extends Event {
 	private transient DSpaceObject object;
 
 	private Action action;
+	
+	private String otherInfo;
 			
 	private static String checkParams(Action action, HttpServletRequest request, Context context, DSpaceObject object)
 	{
@@ -116,6 +119,7 @@ public class UsageEvent extends Event {
 				this.setModify(false);
 		}
 		
+		
 		if(context != null && context.getCurrentUser() != null)
 		{
 			this.setUserId(
@@ -126,6 +130,12 @@ public class UsageEvent extends Event {
 		this.object = object;
 	}
 
+	public UsageEvent (Action action, HttpServletRequest request, Context context, DSpaceObject object, String otherInfo)
+	{
+		this(action,request,context,object);
+		this.otherInfo = otherInfo;
+	}
+	
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -154,4 +164,7 @@ public class UsageEvent extends Event {
 		return this.action;
 	}
 	
+	public String getOtherInfo () {
+		return this.otherInfo;
+	}
 }

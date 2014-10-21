@@ -43,6 +43,8 @@
     boolean displayAll = (displayAllBoolean != null && displayAllBoolean.booleanValue());
     Boolean suggest = (Boolean)request.getAttribute("suggest.enable");
     boolean suggestLink = (suggest == null ? false : suggest.booleanValue());
+    Boolean stats = (Boolean) request.getAttribute("stats.enable");
+    boolean statsLink = (stats == null ? false : stats.booleanValue());   
     Item item = (Item) request.getAttribute("item");
     Collection[] collections = (Collection[]) request.getAttribute("collections");
     Boolean admin_b = (Boolean)request.getAttribute("admin_button");
@@ -191,10 +193,19 @@
         {
 %>
     <a href="<%= request.getContextPath() %>/suggest?handle=<%= handle %>" target="new_window">
-       <fmt:message key="jsp.display-item.suggest"/></a>
+       <fmt:message key="jsp.display-item.suggest"/></a><br />
 <%
         }
+        if (statsLink)
+        {
+
 %>
+    <a href="<%= request.getContextPath() %>/stats?level=item&type=access&page=downviews-series&object=item&object-id=<%= handle %>">
+       <fmt:message key="jsp.layout.navbar-admin.statistics"/></a>
+<%            
+        }
+%>
+
     </div>
 <%
     }

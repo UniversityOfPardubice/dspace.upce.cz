@@ -23,9 +23,11 @@
 		<module>xmlui</module>
 		<module>lni</module>
 		<module>oai</module>
+		<module>oaiextended</module>
 		<module>jspui</module>
 		<module>sword</module>
 		<module>solr</module>
+		<module>stats</module>
 	</modules>
 	
 </project>

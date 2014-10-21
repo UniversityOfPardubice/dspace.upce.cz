@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.Locale;
+
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
@@ -35,8 +37,10 @@ import org.dspace.content.Community;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.app.util.Util;
+import org.dspace.core.I18nUtil;
 import org.dspace.core.ConfigurationManager;
 import org.xml.sax.SAXException;
+import org.apache.log4j.Logger;
 
 /**
  * This transform applys the basic navigational links that should be available
@@ -46,6 +50,8 @@ import org.xml.sax.SAXException;
  */
 public class Navigation extends AbstractDSpaceTransformer implements CacheableProcessingComponent
 {
+    private static final Logger log = Logger.getLogger(Navigation.class);
+
     /** Language Strings */
     private static final Message T_head_all_of_dspace =
         message("xmlui.ArtifactBrowser.Navigation.head_all_of_dspace");
@@ -125,7 +131,8 @@ public class Navigation extends AbstractDSpaceTransformer implements CacheablePr
         List browseGlobal = browse.addList("global");
         List browseContext = browse.addList("context");
 
-        browseGlobal.setHead(T_head_all_of_dspace);
+	//TODO zapoznamkoval jsem
+//        browseGlobal.setHead(T_head_all_of_dspace);
 
         browseGlobal.addItemXref(contextPath + "/community-list",T_communities_and_collections);
 
@@ -205,7 +212,17 @@ public class Navigation extends AbstractDSpaceTransformer implements CacheablePr
         
         pageMeta.addMetadata("page","contactURL").addContent(contextPath + "/contact");
         pageMeta.addMetadata("page","feedbackURL").addContent(contextPath + "/feedback");
-        
+       
+        // Add the locale meta data including language dependant labels
+        Locale[] locales = I18nUtil.getSupportedLocales();
+        for (int i=0; i < locales.length; i++)
+        {
+            pageMeta.addMetadata("page", "supportedLocale").addContent(locales[i].toString());
+            // now add the appropriate labels
+            pageMeta.addMetadata("supportedLocale", locales[i].toString()).addContent(locales[i].getDisplayName(locales[i]));
+        }
+        pageMeta.addMetadata("page","currentLocale").addContent(context.getCurrentLocale().toString());
+         
         DSpaceObject dso = HandleUtil.obtainHandle(objectModel);
         if (dso != null)
         {

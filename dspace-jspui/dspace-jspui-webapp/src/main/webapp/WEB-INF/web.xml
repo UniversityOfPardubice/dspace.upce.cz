@@ -186,6 +186,10 @@
   </listener>
   
   <!-- Servlets -->
+  <servlet>
+    <servlet-name>stats</servlet-name>
+    <servlet-class>org.dspace.app.webui.servlet.stats.StatsServlet</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>authorize</servlet-name>
@@ -467,6 +471,12 @@
       <servlet-name>AuthorityChooseServlet</servlet-name>
       <servlet-class>org.dspace.app.webui.servlet.AuthorityChooseServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>DisplayChart</servlet-name>
+    <servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+  </servlet>
+  
 
   <!-- shibbolized dspace -->
   <servlet>
@@ -481,6 +491,12 @@
  
 
   <!-- Servlet Mappings -->
+  
+  <servlet-mapping>
+    <servlet-name>DisplayChart</servlet-name>
+    <url-pattern>/DisplayChart</url-pattern>
+  </servlet-mapping>
+  
 
   <servlet-mapping>
     <servlet-name>authorize</servlet-name>
@@ -515,6 +531,11 @@
   <servlet-mapping>
     <servlet-name>community-list</servlet-name>
     <url-pattern>/community-list</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>stats</servlet-name>
+    <url-pattern>/stats</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -787,6 +808,12 @@
     <taglib-uri>http://www.dspace.org/dspace-tags.tld</taglib-uri>
     <taglib-location>/WEB-INF/dspace-tags.tld</taglib-location>
   </taglib>
+  
+  <taglib>
+    <taglib-uri>http://www.dspace.org/stats-tags.tld</taglib-uri>
+    <taglib-location>/WEB-INF/stats-tags.tld</taglib-location>
+  </taglib>
+  
   
   </jsp-config>
   

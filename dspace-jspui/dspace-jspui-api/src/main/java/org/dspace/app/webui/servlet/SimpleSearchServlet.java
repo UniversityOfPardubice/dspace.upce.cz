@@ -39,6 +39,9 @@ import org.dspace.search.QueryArgs;
 import org.dspace.search.QueryResults;
 import org.dspace.sort.SortOption;
 
+import org.dspace.usage.UsageEvent;
+import org.dspace.utils.DSpace;
+
 /**
  * Servlet for handling a simple search.
  * <p>
@@ -273,7 +276,16 @@ public class SimpleSearchServlet extends DSpaceServlet
                 {
                     throw new SQLException("Query \"" + query
                             + "\" returned unresolvable item");
+                } else {
+                	new DSpace().getEventService().fireEvent(
+                    		new UsageEvent(
+                    				UsageEvent.Action.SEARCH,
+                    				request, 
+                    				context, 
+                    				resultsItems[itemCount],
+                    				request.getParameter("query")));
                 }
+                
                 itemCount++;
                 break;
 
@@ -291,6 +303,14 @@ public class SimpleSearchServlet extends DSpaceServlet
                 {
                     throw new SQLException("Query \"" + query
                             + "\" returned unresolvable collection");
+                } else {
+                	new DSpace().getEventService().fireEvent(
+                    		new UsageEvent(
+                    				UsageEvent.Action.SEARCH,
+                    				request, 
+                    				context, 
+                    				resultsCollections[collCount],
+                    				request.getParameter("query")));
                 }
 
                 collCount++;
@@ -310,13 +330,22 @@ public class SimpleSearchServlet extends DSpaceServlet
                 {
                     throw new SQLException("Query \"" + query
                             + "\" returned unresolvable community");
+                } else {
+                	new DSpace().getEventService().fireEvent(
+                    		new UsageEvent(
+                    				UsageEvent.Action.SEARCH,
+                    				request, 
+                    				context, 
+                    				resultsCommunities[commCount],
+                    				request.getParameter("query")));
                 }
-
+                
+                
                 commCount++;
                 break;
             }
         }
-
+        
         // Log
         log.info(LogManager.getHeader(context, "search", logInfo + "query=\""
                 + query + "\",results=(" + resultsCommunities.length + ","

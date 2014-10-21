@@ -34,6 +34,13 @@
             <ref bean="dspace.eventService"/>
         </property>
     </bean>
+    
+    <!-- Inject the UMinho Stats Event Listener into the EventService -->
+    <bean class="org.dspace.app.stats.UsageEventJDBCEventListener">
+        <property name="eventService" >
+            <ref bean="dspace.eventService"/>
+        </property>
+    </bean>
           
              
     <!-- 

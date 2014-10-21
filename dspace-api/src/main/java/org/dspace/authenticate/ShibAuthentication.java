@@ -157,19 +157,29 @@ public class ShibAuthentication implements AuthenticationMethod
                 eperson.setEmail(email);
                 if (fname != null)
                 {
-                    eperson.setFirstName(fname);
+//zmena -> vynucena konverze z iso-8859-1 na utf-8
+//Jirka Pinkas 12.2.2012
+                    eperson.setFirstName(new String(fname.getBytes("iso-8859-1"), "utf-8"));
                 }
                 if (lname != null)
                 {
-                    eperson.setLastName(lname);
+//zmena -> vynucena konverze z iso-8859-1 na utf-8
+//Jirka Pinkas 12.2.2012
+                    eperson.setLastName(new String(lname.getBytes("iso-8859-1"), "utf-8"));
                 }
                 eperson.setCanLogIn(true);
                 AuthenticationManager.initEPerson(context, request, eperson);
                 eperson.update();
+
+// ulozeni nove zaregistrovaneho uzivatele do skupiny "uzivatele"
+Group UPAGroup = Group.findByName(context, "uzivatele");
+UPAGroup.addMember(eperson);                    
+UPAGroup.update();
+
                 context.commit();
                 context.setCurrentUser(eperson);
             }
-            catch (AuthorizeException e)
+            catch (Exception e)
             {
                 log.warn("Fail to authorize user with email:" + email, e);
                 eperson = null;
@@ -191,6 +201,9 @@ public class ShibAuthentication implements AuthenticationMethod
             request.getSession().setAttribute("shib.authenticated",
                     Boolean.TRUE);
         }
+
+	//Jirka Pinkas 12.2.2012
+	getSpecialGroups(context, request);
 
         return AuthenticationMethod.SUCCESS;
     }
@@ -231,7 +244,6 @@ public class ShibAuthentication implements AuthenticationMethod
         {
             affiliations = request.getHeader(roleHeader.toLowerCase());
         }
-
         // default role when fully authN but not releasing any roles?
         String defaultRoles = ConfigurationManager
                 .getProperty("authentication.shib.default-roles");
@@ -239,7 +251,6 @@ public class ShibAuthentication implements AuthenticationMethod
         {
             affiliations = defaultRoles;
         }
-
         if (affiliations != null)
         {
             java.util.StringTokenizer st = new java.util.StringTokenizer(

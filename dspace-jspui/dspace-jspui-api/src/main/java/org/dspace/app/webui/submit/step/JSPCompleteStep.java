@@ -19,6 +19,10 @@ import org.dspace.app.util.SubmissionInfo;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.Context;
 
+import org.dspace.content.WorkspaceItem;
+import org.dspace.usage.UsageEvent;
+import org.dspace.utils.DSpace;
+
 /**
  * This is the JSP binding class which defines what happens once a submission completes!
  * <P>
@@ -68,6 +72,22 @@ public class JSPCompleteStep extends JSPStep
             AuthorizeException
     {
         //No pre-processing necessary, since submission is complete!
+    	WorkspaceItem wi = (WorkspaceItem) subInfo.getSubmissionItem();
+        String otherInfo = "item_id=" + wi.getItem().getID() + ":" +
+                           "collection_id=" + wi.getCollection().getID() + ":" +
+                           "old_state=0";
+        
+        new DSpace().getEventService().fireEvent(
+        		new UsageEvent(
+        				UsageEvent.Action.ADVANCED_WORKFLOW,
+        				request,
+        				context,
+        				wi,
+        				otherInfo));
+        
+        //new UsageEvent().fire(request, context, UsageEvent.Action.ADVANCED_WORKFLOW,
+        //        0, wi.getID(), otherInfo);
+
     }
 
     

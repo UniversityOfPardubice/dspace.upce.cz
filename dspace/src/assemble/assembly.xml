@@ -43,6 +43,16 @@
 				<exclude>config/dspace.cfg</exclude>
 			</excludes>
 		</fileSet>
+		<fileSet>
+			<directory>../dspace-uminho-stats</directory>
+			<outputDirectory>.</outputDirectory>
+			<includes>
+				<include>bin/**</include>
+				<include>config/**</include>
+				<include>etc/**</include>
+			</includes>
+		</fileSet>
+		
 	</fileSets>
 
 	<files>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<HTML>
+  <HEAD>
+    <TITLE>Statistics System Documentation: Installation</TITLE>
+    <LINK REL=StyleSheet HREF="style.css" TYPE="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  </HEAD>
+  <BODY>
+    <H1>Statistics System Documentation: Installation</H1>
+
+    <P><A HREF="index.html">Back to contents</A></P>
+
+
+    <H2><A NAME="prerequisites">Prerequisites</A></H2>
+    <p>
+    The list below describes the components and tools you'll need to run the Statistics add-on.
+    <p>
+    <ul>
+       <li>
+         <strong>Dspace 1.7.2 </strong> - This add-on was tested with DSpace version 1.7.2. We can't make any assumptions on whether it will work on future versions of DSpace. </li>
+       <li><strong>PostgreSQL database</strong> - This version has reduced significantly the dependency on PostgreSQL, but there is also some minor issues where the addon depend on PostgreSQL. We plan to resolve completely this question on the next version in order to allow, for instance, Oracle.</li>
+       <li>
+       <strong>Apache combined log format</strong> - The statistics add-on doesn't assume the use 
+       of any particular Web Server, but for the SpiderDetector component the "Apache combined log format" must be used.
+       </li>
+		</ul>
+    
+    <H2><A NAME="installationsteps">Installation Steps</A></H2>
+    <h3>Before you begin</h3>
+    
+    <p>This guide does not provide info on how to install DSpace. The Add-on build and deploy is fully integrated on DSpace.  
+	For instructions on how to install DSpace, please refer to 
+    <a href="http://www.dspace.org/index.php/Architecture/technology/system-docs/index.html">DSpace documentation</a>
+    </p>
+    <p>This add-on is distributed as source-code therefore it must be appended to the DSpace sources 
+    (not to the deployed version). DSpace must be rebuilt and redeployed using the standard DSpace mechanism.
+    
+    </p>
+    
+   <h3>Manual</h3>
+
+<pre>
+[DSPACE-SOURCE] - DSpace source directory
+[SETUP-DIR] - This directory
+
+Automatic Install
+-----------------
+
+Simply execute the 'setup.sh' script.
+(NOTE: Unix platforms only)
+
+$ setup.sh [DSPACE-SOURCE]
+
+Manual Install
+--------------
+
+
+1. Copy & paste the content from [SETUP-DIR]/setup-data/config.new to [DSPACE-SOURCE]/dspace/config/dspace.cfg
+2. Copy & paste the content from [SETUP-DIR]/setup-data/language.en to [DSPACE-SOURCE]/dspace-api/src/main/resources/Messages.properties
+(We also share the portuguese messages)
+3. Apply the patch
+# cd [DSPACE-SOURCE]
+# patch -p0 < [SETUP-DIR]/setup-data/request.diff
+# cp [SETUP-DIR]/setup-data/dspace-source/* [DSPACE-SOURCE]
+
+
+IMPORTANT!
+
+Remember to run the following command after building (maven & ant procedure).
+
+$ bin/stats-init
+</pre>
+   
+   <H2><A NAME="postinstallation">Post-Installation</A></H2>
+   <p>According to your preferences configure dspace user crontab to:</p>
+   <ul>
+   <li>Aggregate the statistics. Example:
+   <pre>
+   0 3 * * * [dspace]/bin/stats-aggregate -c -a
+   </pre> 
+   </li>
+   <li>Run the SpiderDetector. Example:
+   <pre>
+   0 1 * * * [dspace]/bin/stats-detect-spiders -p [path to weblog file]
+   </pre> 
+   </li>
+   </ul>
+   <p>For more information about this procedures see <a href="functional.html">Functional Overview</a></p>
+   
+<p><a href="index.html">Back to contents</a></p>
+<hr>
+    <p>
+    This add-on was developed by <a href="http://www.keep.pt">KEEP SOLUTIONS<a>, a spin-off company of the
+University of Minho, specialized in digital preservation and advanced
+solutions for digital archives and libraries, in partnership with the
+Documentation Services of the University of Minho. The add-on was developed
+in the context of the <a href="http://projecto.rcaap.pt/">RCAAP</a> and <a href="http://www.driver-repository.eu/">DRIVER</a> projects.
+
+Any questions or comments regarding this add-on may be sent to any of the
+following contacts:
+    </p>
+
+
+    
+    <table width="96%" border="0">
+      <tr>
+        <td width="531" valign="center"><p><a href="http://www.keep.pt"><img src="image/logo.jpg" alt="Logo" border="0"></a><br>
+              <a href="http://www.keep.pt">http://www.keep.pt</a></p>
+            <p><strong>Contacts:</strong> </p>
+          <ul>
+              <li>João Melo &lt;<a href="mailto:jmelo@keep.pt">jmelo@keep.pt</a>&gt;</li>
+            <li>Miguel Ferreira &lt;<a href="mailto:mferreira@keep.pt">mferreira@keep.pt</a>&gt; <br>
+              </li>
+          </ul></td>
+        <td width="18"></td>
+        <td width="500" valign="top"><p><a href="http://www.sdum.uminho.pt"><img src="image/uminho_logo.jpeg" alt="Uminho logo" width="125" height="62" border="0"></a><br/>
+              <a href="http://www.sdum.uminho.pt">http://www.sdum.uminho.pt</a></p>
+            <p><strong>Contacts:</strong> </p>
+          <ul>
+              <li>José Carvalho &lt;<a href="mailto:jcarvalho@sdum.uminho.pt">jcarvalho@sdum.uminho.pt</a>&gt; </li>
+            <li>Eloy Rodrigues &lt;<a href="mailto:eloy@sdum.uminho.pt">eloy@sdum.uminho.pt</a>&gt;</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td valign="center">&nbsp;</td>
+        <td></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="center">João Melo</td>
+        <td></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="center">&nbsp;</td>
+        <td></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="center">&nbsp;</td>
+        <td></td>
+        <td align="right"><span style="color:#999999; vertical-align:middle">Financed by: &nbsp;&nbsp;</span> <img src="image/pos_conhecimento.gif" alt="POSC_C"><img src="image/ue.gif" alt="UE"></td>
+      </tr>
+    </table>
+
+  </BODY>
+</HTML>

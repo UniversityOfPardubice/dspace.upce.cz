@@ -18,6 +18,8 @@ import org.apache.cocoon.i18n.I18nUtils;
 import org.apache.cocoon.i18n.I18nUtils.LocaleValidator;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.I18nUtil;
+import org.dspace.app.xmlui.utils.ContextUtil;
+import org.dspace.core.Context;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,9 +102,12 @@ public class DSpaceLocaleAction extends ServiceableAction implements Configurabl
                               "locale-attribute",
                               localeStr,
                               false,
-                              false,
+                              true,
                               false,
                               false);
+
+        Context context = ContextUtil.obtainContext(objectModel);
+        context.setCurrentLocale(locale);
 
         // Set up a map for sitemap parameters
         Map<String, String> map = new HashMap<String, String>();

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statistics level-title="Nível">
+	<page id="initial-text" stylesheet="default.xsl" access-groups="0">
+		<title>Statistiques du RepositóriUM</title>
+		<block name="texto" type="html">
+			<![CDATA[
+			<span class="Normal">
+				Les statistiques ne sont pas encore disponibles en français. Veuillez 
+                                choisir l'interface en portugais ou en anglais. 
+			<br/><br/>
+			</span>
+			]]>
+		</block>
+	</page>
+</statistics>
+

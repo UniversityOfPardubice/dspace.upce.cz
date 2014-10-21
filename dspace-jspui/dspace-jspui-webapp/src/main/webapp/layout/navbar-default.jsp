@@ -223,7 +223,21 @@
   <tr>
     <td colspan="2">&nbsp;</td>
   </tr>
-
+  <% 
+  if (ConfigurationManager.getBooleanProperty("stats.enable"))
+  {
+  %>        
+	  <tr class="navigationBarItem">
+	    <td>
+	      <img alt="" src="<%= request.getContextPath() %>/image/<%= ( currentPage.endsWith( "/stats" ) ? "arrow-highlight" : "arrow" ) %>.gif" width="16" height="16"/>
+	    </td>
+	    <td nowrap="nowrap" class="navigationBarItem">
+	      <a href="<%= request.getContextPath() %>/stats"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a>
+	    </td>
+	  </tr>              
+  <%
+  }
+  %>
   <tr class="navigationBarItem">
     <td>
       <img alt="" src="<%= request.getContextPath() %>/image/<%= ( currentPage.endsWith( "/help" ) ? "arrow-highlight" : "arrow" ) %>.gif" width="16" height="16"/>

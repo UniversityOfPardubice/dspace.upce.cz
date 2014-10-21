@@ -15,11 +15,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.Collection;
+import org.dspace.content.DSpaceObject;
 import org.dspace.content.InProgressSubmission;
 import org.dspace.content.Item;
+import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
 import org.dspace.eperson.EPerson;
+import org.dspace.handle.HandleManager;
 import org.dspace.storage.rdbms.DatabaseManager;
 import org.dspace.storage.rdbms.TableRow;
 import org.dspace.storage.rdbms.TableRowIterator;
@@ -30,7 +33,7 @@ import org.dspace.storage.rdbms.TableRowIterator;
  * @author Robert Tansley
  * @version $Revision$
  */
-public class WorkflowItem implements InProgressSubmission
+public class WorkflowItem extends DSpaceObject implements InProgressSubmission
 {
     /** log4j category */
     private static Logger log = Logger.getLogger(WorkflowItem.class);
@@ -429,4 +432,23 @@ public class WorkflowItem implements InProgressSubmission
     {
         wfRow.setColumn("published_before", b);
     }
+
+	@Override
+	public String getHandle() {
+		try {
+			return HandleManager.findHandle(this.ourContext, this.getItem());
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		return Constants.WORKFLOW;	
+	}
 }

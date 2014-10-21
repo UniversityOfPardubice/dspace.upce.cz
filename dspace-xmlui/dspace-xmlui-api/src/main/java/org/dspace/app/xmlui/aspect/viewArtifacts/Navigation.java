@@ -28,6 +28,10 @@ import org.dspace.content.Item;
 import org.dspace.core.ConfigurationManager;
 import org.xml.sax.SAXException;
 
+import java.util.Locale;
+import org.dspace.core.I18nUtil;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -42,6 +46,8 @@ import java.sql.SQLException;
  * @author Ben Bosman (ben at atmire dot com)
  */
 public class Navigation extends AbstractDSpaceTransformer implements CacheableProcessingComponent {
+
+	private static final Logger log = Logger.getLogger(Navigation.class);
 
     /**
      * Generate the unique caching key.
@@ -129,6 +135,17 @@ public class Navigation extends AbstractDSpaceTransformer implements CacheablePr
 
         pageMeta.addMetadata("page","contactURL").addContent(contextPath + "/contact");
         pageMeta.addMetadata("page","feedbackURL").addContent(contextPath + "/feedback");
+
+        // Add the locale meta data including language dependant labels
+        Locale[] locales = I18nUtil.getSupportedLocales();
+        for (int i=0; i < locales.length; i++)
+        {
+            pageMeta.addMetadata("page", "supportedLocale").addContent(locales[i].toString());
+            // now add the appropriate labels
+            pageMeta.addMetadata("supportedLocale", locales[i].toString()).addContent(locales[i].getDisplayName(locales[i]));
+        }
+        pageMeta.addMetadata("page","currentLocale").addContent(context.getCurrentLocale().toString());
+
 
         DSpaceObject dso = HandleUtil.obtainHandle(objectModel);
         if (dso != null)

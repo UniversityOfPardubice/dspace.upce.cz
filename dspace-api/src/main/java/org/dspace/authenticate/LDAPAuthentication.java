@@ -10,15 +10,9 @@ package org.dspace.authenticate;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.BasicAttributes;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
-import javax.naming.directory.SearchResult;
+import javax.naming.directory.*;
+import javax.naming.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -144,20 +138,26 @@ public class LDAPAuthentication
             return BAD_ARGS;
         }
 
+System.out.println("logovaci vypis: "+netid+"#nso"+password+"osn");
+
         // Locate the eperson
         EPerson eperson = null;
         try
         {
+System.out.println("AAA 1. EPerson.findByNetid");
         		eperson = EPerson.findByNetid(context, netid.toLowerCase());
         }
         catch (SQLException e)
         {
         }
+System.out.println("AAA 2. SpeakerToLDAP");
         SpeakerToLDAP ldap = new SpeakerToLDAP(log);
 
         // if they entered a netid that matches an eperson
         if (eperson != null)
         {
+System.out.println("AAA 3.");
+
             // e-mail address corresponds to active account
             if (eperson.getRequireCertificate())
             {
@@ -167,9 +167,12 @@ public class LDAPAuthentication
             {
                 return BAD_ARGS;
             }
+System.out.println("AAA 4.");
 
             if (ldap.ldapAuthenticate(netid, password, context))
             {
+System.out.println("AAA 5.");
+
                 eperson = EPerson.findByNetid(context, netid.toLowerCase());
                 context.setCurrentUser(eperson);
                 log.info(LogManager.getHeader(context, "authenticate", "type=ldap"));
@@ -185,16 +188,21 @@ public class LDAPAuthentication
         // with ldap and create an eperson for them
         else
         {
+System.out.println("AAA 6.");
+
             if (ldap.ldapAuthenticate(netid, password, context))
             {
                 // Register the new user automatically
                 log.info(LogManager.getHeader(context,
                                 "autoregister", "netid=" + netid));
 
+
                 if ((ldap.ldapEmail!=null)&&(!ldap.ldapEmail.equals("")))
                 {
                     try
                     {
+System.out.println("AAA 7.");
+
                         eperson = EPerson.findByEmail(context, ldap.ldapEmail);
 	                    if (eperson!=null)
 	                    {
@@ -210,12 +218,16 @@ public class LDAPAuthentication
 	                    }
 	                    else
 	                    {
+System.out.println("AAA 8.");
+
 	                        if (canSelfRegister(context, request, netid))
 	                        {
 	                            // TEMPORARILY turn off authorisation
 	                            try
 	                            {
 	                                context.setIgnoreAuthorization(true);
+System.out.println("AAA 9.");
+
 	                                eperson = EPerson.create(context);
 	                                if ((ldap.ldapEmail!=null)&&(!ldap.ldapEmail.equals("")))
                                     {
@@ -239,9 +251,28 @@ public class LDAPAuthentication
                                     }
 	                                eperson.setNetid(netid.toLowerCase());
 	                                eperson.setCanLogIn(true);
+System.out.println("AAA 10.");
+
 	                                AuthenticationManager.initEPerson(context, request, eperson);
+System.out.println("AAA 11.");
+
 	                                eperson.update();
+System.out.println("AAA 12.");
+
+// ulozeni nove zaregistrovaneho uzivatele do skupiny "uzivatele"
+Group UPAGroup = Group.findByName(context, "uzivatele");
+System.out.println("AAA 13.");
+
+UPAGroup.addMember(eperson);                    
+System.out.println("AAA 14.");
+
+UPAGroup.update();
+System.out.println("AAA 15");
+
+
 	                                context.commit();
+System.out.println("AAA 16");
+
 									context.setCurrentUser(eperson);
 								}
 	                            catch (AuthorizeException e)
@@ -277,6 +308,8 @@ public class LDAPAuthentication
                 }
             }
         }
+System.out.println("AAA 17 FINISH");
+
         return BAD_ARGS;
     }
 
@@ -320,7 +353,9 @@ public class LDAPAuthentication
 
                 // Authenticate
                 env.put(javax.naming.Context.SECURITY_AUTHENTICATION, "simple");
-                env.put(javax.naming.Context.SECURITY_PRINCIPAL, ldap_id_field+"="+netid+","+ldap_object_context);
+//                env.put(javax.naming.Context.SECURITY_PRINCIPAL, ldap_id_field+"="+netid+","+ldap_object_context);
+//Jirka Pinkas zmena 13.2.2012
+env.put(javax.naming.Context.SECURITY_PRINCIPAL, netid + "@upce.cz");
                 env.put(javax.naming.Context.SECURITY_CREDENTIALS, password);
 
                 DirContext ctx = null;
@@ -333,16 +368,27 @@ public class LDAPAuthentication
                     String ldap_givenname_field = ConfigurationManager.getProperty("ldap.givenname_field");
                     String ldap_surname_field = ConfigurationManager.getProperty("ldap.surname_field");
                     String ldap_phone_field = ConfigurationManager.getProperty("ldap.phone_field");
-
-                    Attributes matchAttrs = new BasicAttributes(true);
-                    matchAttrs.put(new BasicAttribute(ldap_id_field, netid));
+//                    Attributes matchAttrs = new BasicAttributes(true);
+//                    matchAttrs.put(new BasicAttribute(ldap_id_field, netid));
+//                    String attlist[] = {ldap_email_field, ldap_givenname_field, ldap_surname_field, ldap_phone_field};
+//Jirka Pinkas 13.2.2012
 
                     String attlist[] = {ldap_email_field, ldap_givenname_field, ldap_surname_field, ldap_phone_field};
+
+String searchFilter = "(&(objectClass=user)(sAMAccountName="+netid+"))";
 
                     // look up attributes
                     try
                     {
-                        NamingEnumeration answer = ctx.search(ldap_search_context, matchAttrs, attlist);
+//Jirka Pinkas 13.2.2012
+//                        NamingEnumeration answer = ctx.search(ldap_search_context, matchAttrs, attlist);
+SearchControls searchCtls = new SearchControls();
+//Specify the search scope
+searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+String returnedAtts[]={ldap_email_field, ldap_givenname_field, ldap_surname_field};
+searchCtls.setReturningAttributes(returnedAtts);
+NamingEnumeration answer = ctx.search(ldap_search_context, searchFilter, searchCtls);
+
                         while(answer.hasMore()) {
                             SearchResult sr = (SearchResult)answer.next();
                             Attributes atts = sr.getAttributes();

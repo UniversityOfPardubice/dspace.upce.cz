@@ -40,11 +40,17 @@ public class Constants
     /** Type of individual eperson objects */
     public static final int EPERSON = 7;
 
+    /** Type of WORKSPACE Item objects */
+    public static final int WORKSPACE = 8;
+    
+    /** Type of WORKSPACE Item objects */
+    public static final int WORKFLOW = 9;
+
     /**
      * lets you look up type names from the type IDs
      */
     public static final String[] typeText = { "BITSTREAM", "BUNDLE", "ITEM",
-            "COLLECTION", "COMMUNITY", "SITE", "GROUP", "EPERSON" };
+            "COLLECTION", "COMMUNITY", "SITE", "GROUP", "EPERSON", "WORSPACE", "WORKFLOW" };
 
     /**
      * Special Bundle and Bitstream Names:
@@ -127,6 +133,10 @@ public class Constants
      */
     public static final int ADMIN = 11;
     
+    /** action for view statistics */
+    public static final int VIEW_STATISTICS = 12;
+
+    
     /** Position of front page news item -- top box */
     public static final int NEWS_TOP = 0;
 
@@ -139,7 +149,8 @@ public class Constants
     public static final String[] actionText = { "READ", "WRITE",
             "OBSOLETE (DELETE)", "ADD", "REMOVE", "WORKFLOW_STEP_1",
             "WORKFLOW_STEP_2", "WORKFLOW_STEP_3", "WORKFLOW_ABORT",
-            "DEFAULT_BITSTREAM_READ", "DEFAULT_ITEM_READ", "ADMIN" };
+            "DEFAULT_BITSTREAM_READ", "DEFAULT_ITEM_READ", "ADMIN",
+            "VIEW_STATISTICS" };
 
     /**
      * constants for the relevance array generating dynamicallis is simple: just
@@ -175,7 +186,8 @@ public class Constants
             0, // 8 - WORKFLOW_ABORT
             RCOLLECTION, // 9 - DEFAULT_BITSTREAM_READ
             RCOLLECTION, // 10 - DEFAULT_ITEM_READ
-            RITEM | RCOLLECTION | RCOMMUNITY // 11 - ADMIN
+            RITEM | RCOLLECTION | RCOMMUNITY, // 11 - ADMIN
+            RITEM | RCOLLECTION | RCOMMUNITY // 12 - VIEW_STATISTICS
     };
 
     public static final String DEFAULT_ENCODING = "UTF-8";

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.dspace</groupId>
@@ -77,9 +78,11 @@
             <module>dspace-stats</module>
             <module>dspace-discovery</module>
             <module>dspace-jspui</module>
+            <module>dspace-uminho-stats</module>
             <module>dspace-xmlui</module>
             <module>dspace-lni</module>
             <module>dspace-oai</module>
+            <module>dspace-oaiextended</module>
             <module>dspace-sword</module>
             <module>dspace</module>
          </modules>
@@ -100,9 +103,11 @@
             <module>dspace-stats</module>
             <module>dspace-discovery</module>
             <module>dspace-jspui</module>
+            <module>dspace-uminho-stats</module>
             <module>dspace-xmlui</module>
             <module>dspace-lni</module>
             <module>dspace-oai</module>
+            <module>dspace-oaiextended</module>
             <module>dspace-sword</module>
          </modules>
       </profile>
@@ -209,6 +214,17 @@
          <dependency>
             <groupId>org.dspace</groupId>
             <artifactId>dspace-oai-webapp</artifactId>
+            <version>1.7.2</version>
+            <type>war</type>
+         </dependency>
+         <dependency>
+            <groupId>org.dspace</groupId>
+            <artifactId>dspace-oaiextended-api</artifactId>
+            <version>1.7.2</version>
+         </dependency>
+         <dependency>
+            <groupId>org.dspace</groupId>
+            <artifactId>dspace-oaiextended-webapp</artifactId>
             <version>1.7.2</version>
             <type>war</type>
          </dependency>
@@ -522,7 +538,7 @@
          <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>8.1-408.jdbc3</version>
+            <version>8.4-702.jdbc4</version>
          </dependency>
          <dependency>
             <groupId>com.oracle</groupId>

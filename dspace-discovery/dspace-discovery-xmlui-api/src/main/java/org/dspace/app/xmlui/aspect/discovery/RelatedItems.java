@@ -132,11 +132,25 @@ public class RelatedItems extends AbstractFiltersTransformer
 
         this.queryArgs = prepareDefaultFilters(getView());
         this.queryArgs.setRows(1);
-        this.queryArgs.add("fl","dc.contributor,dc.contributor.author,handle");
-        this.queryArgs.add("mlt","true");
-        this.queryArgs.add("mlt.fl","dc.contributor,dc.contributor.author,handle");
-        this.queryArgs.add("mlt.mindf","1");
-        this.queryArgs.add("mlt.mintf","1");
+        
+        // TODO PRIDAL JSEM
+        this.queryArgs.add("query", "true");
+
+        //TODO tohle jsem pridal
+        this.queryArgs.add("fl", "dc.contributor.author,handle");
+        //original
+//        this.queryArgs.add("fl","dc.contributor,dc.contributor.author,handle");
+
+	// TODO VYPNUL JSEM
+//        this.queryArgs.add("mlt","true");
+        
+        //TODO VYPNUL JSEM
+//        this.queryArgs.add("mlt.fl", "dc.contributor.author,handle");
+        //original
+//        this.queryArgs.add("mlt.fl","dc.contributor,dc.contributor.author,handle");
+
+//        this.queryArgs.add("mlt.mindf","2");
+//        this.queryArgs.add("mlt.mintf","1");
         this.queryArgs.setQuery("handle:" + dso.getHandle());
         this.queryArgs.setRows(1);
 

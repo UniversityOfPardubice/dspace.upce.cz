@@ -79,7 +79,7 @@
                 <module>../dspace-api</module>
             </modules>
         </profile>
-
+       
         <!--
            Builds DSpace Solr Stats for DSpace
         -->
@@ -264,6 +264,29 @@
                 <module>../dspace-xmlui-api</module>
             </modules>
         </profile>
+        
+       <profile>
+         <id>dspace-oaiextended-api</id>
+         <activation>
+            <file>
+               <exists>../dspace-oaiextended-api/pom.xml</exists>
+            </file>
+         </activation>
+         <modules>
+            <module>../dspace-oaiextended-api</module>
+         </modules>
+      </profile>
+      <profile>
+         <id>dspace-oaiextended-webapp</id>
+         <activation>
+            <file>
+               <exists>../dspace-oaiextended-webapp/pom.xml</exists>
+            </file>
+         </activation>
+         <modules>
+            <module>../dspace-oaiextended-webapp</module>
+         </modules>
+      </profile>
 
         <profile>
             <id>dspace-xmlui-wing</id>
@@ -369,6 +392,37 @@
                 <module>../dspace-lni</module>
             </modules>
         </profile>
+	<!-- 
+         Builds STATS API for DSpace
+      -->
+      <profile>
+
+         <id>dspace-uminho-stats-api</id>
+         <activation>
+            <file>
+               <exists>../dspace-uminho-stats-api/pom.xml</exists>
+            </file>
+         </activation>
+         <modules>
+            <module>../dspace-uminho-stats-api</module>
+         </modules>
+      </profile>
+
+      <!-- 
+         Builds STATS API for DSpace
+      -->
+      <profile>
+
+         <id>dspace-uminho-stats-jspui-api</id>
+         <activation>
+            <file>
+               <exists>../dspace-uminho-stats-jspui-api/pom.xml</exists>
+            </file>
+         </activation>
+         <modules>
+            <module>../dspace-uminho-stats-jspui-api</module>
+         </modules>
+      </profile>
 
         <!--
            Builds Language Packs for DSpace
@@ -550,6 +604,11 @@
         <dependency>
              <groupId>org.dspace</groupId>
              <artifactId>dspace-stats</artifactId>
+         </dependency>
+        <dependency>
+             <groupId>org.dspace</groupId>
+             <artifactId>dspace-uminho-stats-api</artifactId>
+			 <version>1.7.2</version>
          </dependency>
          <dependency>
             <groupId>org.dspace</groupId>

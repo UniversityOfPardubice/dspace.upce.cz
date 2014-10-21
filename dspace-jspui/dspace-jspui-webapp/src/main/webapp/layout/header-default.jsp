@@ -48,6 +48,7 @@
         <meta name="Generator" content="<%= generator %>" />
         <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css" type="text/css" />
         <link rel="stylesheet" href="<%= request.getContextPath() %>/print.css" media="print" type="text/css" />
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/stats/styles.css.jsp" type="text/css" />
         <link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico" type="image/x-icon"/>
 <%
     if (!"NONE".equals(feedRef))

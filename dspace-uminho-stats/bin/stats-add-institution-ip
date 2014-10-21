@@ -1,0 +1,27 @@
+#!/bin/bash
+# Shell script for setup the uminho stats addon 
+
+BINDIR=`dirname $0`
+DSPACEDIR=`cd "$BINDIR/.." ; pwd`
+
+# Get the JARs in $DSPACEDIR/jsp/WEB-INF/lib, separated by ':'
+JARS=`echo $DSPACEDIR/lib/*.jar | sed 's/ /\:/g'`
+
+# Class path for DSpace will be:
+#   Any existing classpath
+#   The JARs (WEB-INF/lib/*.jar)
+#   The WEB-INF/classes directory
+FULLPATH=$CLASSPATH:$JARS:$DSPACEDIR/config
+
+#Allow user to specify java options through JAVA_OPTS variable
+if [ "$JAVA_OPTS" = "" ]; then
+  #Default Java to use 256MB of memory
+  JAVA_OPTS=-Xmx256m
+fi
+
+echo "INSERT INTO stats.ip_institution VALUES ('$1');" > query.sql
+
+# Now invoke Java
+java $JAVA_OPTS -classpath $FULLPATH org.dspace.storage.rdbms.InitializeDatabase "query.sql"
+
+rm query.sql

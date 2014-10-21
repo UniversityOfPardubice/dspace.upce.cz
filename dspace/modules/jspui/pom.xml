@@ -125,6 +125,16 @@
         </dependency>
 
 		<dependency>
+			<groupId>org.dspace</groupId>
+			<artifactId>dspace-uminho-stats-api</artifactId>
+		   	<version>1.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.dspace</groupId>
+			<artifactId>dspace-uminho-stats-jspui-api</artifactId>
+		   	<version>1.7.2</version>
+		</dependency>
+		<dependency>
 		   <groupId>javax.servlet</groupId>
 		   <artifactId>servlet-api</artifactId>
 		   <version>2.3</version>

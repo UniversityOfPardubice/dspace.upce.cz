@@ -37,6 +37,8 @@ import org.dspace.eperson.EPerson;
 import org.dspace.eperson.Group;
 import org.dspace.handle.HandleManager;
 import org.dspace.submit.AbstractProcessingStep;
+import org.dspace.usage.UsageEvent;
+import org.dspace.utils.DSpace;
 import org.dspace.workflow.WorkflowItem;
 import org.dspace.workflow.WorkflowManager;
 
@@ -425,9 +427,23 @@ public class MyDSpaceServlet extends DSpaceServlet
         {
             Item item = workflowItem.getItem();
 
+            Integer oldState = workflowItem.getState();
+            
             // Advance the item along the workflow
             WorkflowManager.advance(context, workflowItem, context
                     .getCurrentUser());
+            
+            String otherInfo = "item_id=" + workflowItem.getItem().getID() + ":" +
+            					"collection_id=" + workflowItem.getCollection().getID() + ":" +
+            					"old_state=" + oldState;
+            
+            new DSpace().getEventService().fireEvent(
+            		new UsageEvent(
+            				UsageEvent.Action.ADVANCED_WORKFLOW,
+            				request, 
+            				context, 
+            				workflowItem,
+            				otherInfo));
 
             // FIXME: This should be a return value from advance()
             // See if that gave the item a Handle. If it did,
