@@ -8,7 +8,7 @@
     <div id="index-news-aside">
 	<list>
 	    <head>Užitečné odkazy:</head>
-	    <item><figure source="/themes/upce/css/images/logo_OA.png" target="http://www.upce.cz/knihovna/podpora/oa.html"/></item>
+	    <item><figure source="/dspace-static/css/images/logo_OA.png" target="http://www.upce.cz/knihovna/podpora/oa.html"/></item>
 	    <item><xref rend="link-break" target="https://studenti.upce.cz/knihovna/zaverec_prace.html">Pomůcka pro formální</xref> <xref target="https://studenti.upce.cz/knihovna/zaverec_prace.html">úpravu závěrečných prací</xref></item>
 	    <item><xref rend="link-break" target="http://citace.com/soubory/csniso690-interpretace.pdf">Bibligrafické citace</xref> <xref target="http://citace.com/soubory/csniso690-interpretace.pdf">dle ČSN ISO 690</xref></item>
 	</list>
