@@ -179,7 +179,7 @@
         <!-- <theme name="Test Theme 2" regex="community-list" path="theme2/"/> -->
 
         <!-- Mirage theme, @mire contributed theme, default since DSpace 3.0 -->
-        <theme name="Atmire Mirage Theme" regex=".*" path="Mirage/" />
+        <!-- <theme name="Atmire Mirage Theme" regex=".*" path="Mirage/" /> -->
 
         <!-- Reference theme, the default Manakin XMLUI layout up to DSpace 1.8 -->
         <!-- <theme name="Default Reference Theme" regex=".*" path="Reference/" /> -->
@@ -190,6 +190,7 @@
         <!-- The Kubrick theme -->
         <!-- <theme name="Kubrick" regex=".*" path="Kubrick/" /> -->
 
+        <theme name="UPCE DSpace Theme" regex=".*" path="upce/" />
         <!--
              For information on configuring the mobile theme, see:
              dspace-xmlui/src/main/webapp/themes/mobile/readme.txt

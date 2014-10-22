@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: news-xmlui.xml 44 2014-03-13 11:13:51Z lusl0338 $ -->
+<!-- https://wiki.duraspace.org/display/DSDOC4x/DRI+Schema+Reference -->
 <document xmlns="http://di.tamu.edu/DRI/1.0/" xmlns:i18n="http://apache.org/cocoon/i18n/2.1" version="1.1">
 <body>
 <div id="file.news.div.news" n="news" rend="primary">
-<head>DSpace Repository</head>
-<p>DSpace is a digital service that collects, preserves, and distributes digital material. Repositories are important tools for preserving an organization&apos;s legacy; they facilitate digital preservation and scholarly communication.</p>
+    <head>Digitální knihovna Univerzity Pardubice</head>
+    <div id="index-news-aside">
+	<list>
+	    <head>Užitečné odkazy:</head>
+	    <item><figure source="/themes/upce/css/images/logo_OA.png" target="http://www.upce.cz/knihovna/podpora/oa.html"/></item>
+	    <item><xref rend="link-break" target="https://studenti.upce.cz/knihovna/zaverec_prace.html">Pomůcka pro formální</xref> <xref target="https://studenti.upce.cz/knihovna/zaverec_prace.html">úpravu závěrečných prací</xref></item>
+	    <item><xref rend="link-break" target="http://citace.com/soubory/csniso690-interpretace.pdf">Bibligrafické citace</xref> <xref target="http://citace.com/soubory/csniso690-interpretace.pdf">dle ČSN ISO 690</xref></item>
+	</list>
+    </div>
+    <p>Najdete zde především vybrané <xref target="/handle/10195/37631">publikace vydané Univerzitou Pardubice</xref>,
+	vybranou <xref target="/handle/10195/34541">publikační činnost akademických pracovníků UPa</xref> zpřístupněnou na
+	základě pravidel open access, bibliografické záznamy (u některých je připojen plný text práce) závěrečných
+	prací z let 1992–2007 uložené v kolekci <xref target="/handle/10195/4">Vysokoškolské kvalifikační práce</xref> a plné
+	texty závěrečných prací obhájených po roce 2008 uložené v kolekcích jednotlivých kateder a zároveň v kolekci
+	<xref target="/handle/10195/4">Vysokoškolské kvalifikační práce</xref>.</p>
+    <p>Pokud jste zaměstnancem UPa a máte zájem o zpřístupnění své publikační činnosti v Digitální knihovně UPa,
+	kontaktujte jejího <xref target="mailto:lucie.vycitalova%40upce.cz">správce</xref>.</p>
 </div>
 </body>
 <options/>
