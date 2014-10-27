@@ -33,7 +33,7 @@
     <!-- An example of an existing template copied from structural.xsl and overridden -->  
     <xsl:template name="buildFooter">
         <div id="ds-footer">
-            This footer has had its text and links changed. This change should override the existing template.
+            © <a href="http://www.upce.cz/">Univerzita Pardubice</a> &amp; <a href="http://www.upce.cz/knihovna/">Univerzitní knihovna Univerzity Pardubice</a>.
             <div id="ds-footer-links">
                 <a>
                     <xsl:attribute name="href">

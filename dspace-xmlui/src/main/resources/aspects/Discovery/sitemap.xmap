@@ -114,7 +114,7 @@ and searching the repository.
 				<map:transform type="SidebarFacetsTransformer"/>
                 <map:transform type="SimpleSearch"/>
                 <map:transform type="IncludePageMeta">
-                    <map:parameter name="stylesheet.screen.discovery#1" value="../../static/css/discovery/discovery-style.css"/>
+                    <map:parameter name="stylesheet.screen.discovery#1" value="/static/css/discovery/discovery-style.css"/>
 
                     <map:parameter name="javascript.static#2" value="static/js/discovery/search-controls.js"/>
                 </map:transform>
@@ -150,7 +150,7 @@ and searching the repository.
                             <map:transform type="SidebarFacetsTransformer"/>
                             <map:transform type="SimpleSearch"/>
                             <map:transform type="IncludePageMeta">
-                                <map:parameter name="stylesheet.screen.discovery#1" value="../../static/css/discovery/discovery-style.css"/>
+                                <map:parameter name="stylesheet.screen.discovery#1" value="/static/css/discovery/discovery-style.css"/>
 
                                 <map:parameter name="javascript.static#2" value="static/js/discovery/search-controls.js"/>
                             </map:transform>

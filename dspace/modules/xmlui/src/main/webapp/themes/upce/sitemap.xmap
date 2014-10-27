@@ -98,12 +98,15 @@
 				<map:select type="browser">
 					<map:when test="explorer">
 						<map:transform type="IncludePageMeta">
-							<map:parameter name="stylesheet.screen#1" value="lib/style.css"/>
-							<map:parameter name="stylesheet.screen#2" value="lib/style-ie.css"/>
-							<map:parameter name="stylesheet.screen#3" value="lib/css/jquery-ui-1.8.15.custom.css"/>
+							<map:parameter name="stylesheet.screen#1" value="/dspace-static/css/style.css"/>
+							<map:parameter name="stylesheet.screen#2" value="/dspace-static/css/style-ie.css"/>
+							<map:parameter name="stylesheet.screen#3" value="/dspace-static/jquery/plugins/ui/jquery-ui.min.css"/>
+							<map:parameter name="stylesheet.screen#4" value="/dspace-static/jquery/plugins/jstree/themes/default/style.min.css"/>
 
-                            <map:parameter name="javascript#1" value="lib/js/jquery-1.6.2.min.js"/>
-							<map:parameter name="javascript#2" value="lib/js/jquery-ui-1.8.15.custom.min.js"/>
+							<map:parameter name="javascript#1" value="/dspace-static/jquery/jquery.min.js"/>
+							<map:parameter name="javascript#2" value="/dspace-static/jquery/plugins/ui/jquery-ui.min.js"/>
+							<map:parameter name="javascript#3" value="/dspace-static/jquery/plugins/jstree/jstree.min.js"/>
+							<map:parameter name="javascript#4" value="/dspace-static/javascript/script.min.js"/>
 
 							
 							<map:parameter name="theme.path" value="{global:theme-path}"/>
@@ -112,11 +115,14 @@
 					</map:when>
 					<map:otherwise>
 						<map:transform type="IncludePageMeta">
-							<map:parameter name="stylesheet.screen" value="lib/style.css"/>
-							<map:parameter name="stylesheet.screen#2" value="lib/jquery-ui-1.8.15.custom.css"/>
+							<map:parameter name="stylesheet.screen" value="/dspace-static/css/style.css"/>
+							<map:parameter name="stylesheet.screen#2" value="/dspace-static/jquery/plugins/ui/jquery-ui.min.css"/>
+							<map:parameter name="stylesheet.screen#3" value="/dspace-static/jquery/plugins/jstree/themes/default/style.min.css"/>
 
-                            <map:parameter name="javascript#1" value="lib/jquery-1.6.2.min.js"/>
-							<map:parameter name="javascript#2" value="lib/jquery-ui-1.8.15.custom.min.js"/>
+							<map:parameter name="javascript#1" value="/dspace-static/jquery/jquery.min.js"/>
+							<map:parameter name="javascript#2" value="/dspace-static/jquery/plugins/ui/jquery-ui.min.js"/>
+							<map:parameter name="javascript#3" value="/dspace-static/jquery/plugins/jstree/jstree.min.js"/>
+							<map:parameter name="javascript#4" value="/dspace-static/javascript/script.min.js"/>
 
 							
 							<map:parameter name="theme.path" value="{global:theme-path}"/>
