@@ -12,3 +12,9 @@
 *.PDF  diff=astextplain
 *.rtf  diff=astextplain
 *.RTF  diff=astextplain
+
+dspace/bin/dspace	eol=lf
+dspace/bin/dspace-info.pl	eol=lf
+dspace/bin/log-reporter	eol=lf
+dspace/bin/make-handle-config	eol=lf
+dspace/bin/start-handle-server	eol=lf
